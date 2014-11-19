@@ -35,9 +35,10 @@ public class WaveView extends View {
 	private int waveToTop;
 	private int aboveWaveColor;
 	private int blowWaveColor;
-	private int progress;
+	private float progress;
 
 	private int offsetIndex = 0;
+	private int circle_bg;
 
 	/** wave length */
 	private final int x_zoom = 100;
@@ -74,8 +75,10 @@ public class WaveView extends View {
 						default_above_wave_color);
 		blowWaveColor = attributes.getColor(
 				R.styleable.WaveView_blow_wave_color, default_blow_wave_color);
-		progress = attributes.getInt(R.styleable.WaveView_progress,
+		progress = attributes.getFloat(R.styleable.WaveView_progress,
 				default_progress);
+		circle_bg = attributes.getResourceId(R.styleable.WaveView_circle_bg,
+				R.drawable.count_bg);
 		paint = new Paint();
 		paint.setAntiAlias(true);
 		paint.setColor(Color.argb(255, 207, 60, 11));
@@ -111,8 +114,22 @@ public class WaveView extends View {
 
 	@Override
 	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-		setMeasuredDimension(measure(widthMeasureSpec, true),
-				measure(heightMeasureSpec, false));
+		// setMeasuredDimension(measure(widthMeasureSpec, true),
+		// measure(heightMeasureSpec, false));
+
+		// int widthMode = MeasureSpec.getMode(widthMeasureSpec);
+		int widthSize = MeasureSpec.getSize(widthMeasureSpec);
+		// int heightMode = MeasureSpec.getMode(heightMeasureSpec);
+		int heightSize = MeasureSpec.getSize(heightMeasureSpec);
+		// if (widthMode == MeasureSpec.EXACTLY) {
+		// width = widthSize;
+		// }
+		//
+		// if (heightMode == MeasureSpec.EXACTLY) {
+		// height = heightSize;
+		// }
+
+		setMeasuredDimension(circleHeight, circleHeight);
 	}
 
 	private int measure(int measureSpec, boolean isWidth) {
@@ -148,8 +165,7 @@ public class WaveView extends View {
 		blowWavePaint.setAlpha(default_blow_wave_alpha);
 		blowWavePaint.setStyle(Paint.Style.FILL);
 		blowWavePaint.setAntiAlias(true);
-		circleBitmap = BitmapFactory.decodeResource(getResources(),
-				R.drawable.count_bg);
+		circleBitmap = BitmapFactory.decodeResource(getResources(), circle_bg);
 		circleHeight = circleBitmap.getHeight();
 	}
 
@@ -178,9 +194,9 @@ public class WaveView extends View {
 		blowWavePath.lineTo(circleBitmap.getHeight(), circleBitmap.getHeight());
 	}
 
-	public void setProgress(int progress) {
+	public void setProgress(float progress) {
 
-		this.progress = progress > 100 ? 100 : progress;
+		this.progress = progress > 1 ? 1 : progress;
 	}
 
 	@Override
@@ -230,19 +246,19 @@ public class WaveView extends View {
 	private class RefreshProgressRunnable implements Runnable {
 		public void run() {
 			synchronized (WaveView.this) {
-				waveToTop = (int) (circleBitmap.getHeight() * (1f - progress / 100f));
+				waveToTop = (int) (circleBitmap.getHeight() * (1f - progress));
 
 				calculatePath();
 
 				invalidate();
 
-				postDelayed(this, 150);
+				postDelayed(this, 40);
 			}
 		}
 	}
 
 	private static class SavedState extends BaseSavedState {
-		int progress;
+		float progress;
 
 		/**
 		 * Constructor called from
@@ -257,13 +273,13 @@ public class WaveView extends View {
 		 */
 		private SavedState(Parcel in) {
 			super(in);
-			progress = in.readInt();
+			progress = in.readFloat();
 		}
 
 		@Override
 		public void writeToParcel(Parcel out, int flags) {
 			super.writeToParcel(out, flags);
-			out.writeInt(progress);
+			out.writeFloat(progress);
 		}
 
 		public static final Creator<SavedState> CREATOR = new Creator<SavedState>() {

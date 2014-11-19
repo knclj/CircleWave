@@ -34,11 +34,19 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
+        public static final int circle_bg=0x7f010003;
+        /** <p>Must be a floating point value, such as "<code>1.2</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
         public static final int progress=0x7f010002;
         /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
          */
-        public static final int waveViewStyle=0x7f010003;
+        public static final int waveViewStyle=0x7f010004;
     }
     public static final class color {
         public static final int activity_personal_data_tv_chosenwhite=0x7f0400a5;
@@ -265,7 +273,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
            @see #Themes_waveViewStyle
          */
         public static final int[] Themes = {
-            0x7f010003
+            0x7f010004
         };
         /**
           <p>This symbol is the offset where the {@link com.android.wave.R.attr#waveViewStyle}
@@ -285,14 +293,16 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
            <tr><th>Attribute</th><th>Description</th></tr>
            <tr><td><code>{@link #WaveView_above_wave_color com.android.wave:above_wave_color}</code></td><td></td></tr>
            <tr><td><code>{@link #WaveView_blow_wave_color com.android.wave:blow_wave_color}</code></td><td></td></tr>
+           <tr><td><code>{@link #WaveView_circle_bg com.android.wave:circle_bg}</code></td><td></td></tr>
            <tr><td><code>{@link #WaveView_progress com.android.wave:progress}</code></td><td></td></tr>
            </table>
            @see #WaveView_above_wave_color
            @see #WaveView_blow_wave_color
+           @see #WaveView_circle_bg
            @see #WaveView_progress
          */
         public static final int[] WaveView = {
-            0x7f010000, 0x7f010001, 0x7f010002
+            0x7f010000, 0x7f010001, 0x7f010002, 0x7f010003
         };
         /**
           <p>This symbol is the offset where the {@link com.android.wave.R.attr#above_wave_color}
@@ -325,11 +335,25 @@ containing a value of this type.
         */
         public static final int WaveView_blow_wave_color = 1;
         /**
-          <p>This symbol is the offset where the {@link com.android.wave.R.attr#progress}
+          <p>This symbol is the offset where the {@link com.android.wave.R.attr#circle_bg}
           attribute's value can be found in the {@link #WaveView} array.
 
 
           <p>Must be an integer value, such as "<code>100</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.android.wave:circle_bg
+        */
+        public static final int WaveView_circle_bg = 3;
+        /**
+          <p>This symbol is the offset where the {@link com.android.wave.R.attr#progress}
+          attribute's value can be found in the {@link #WaveView} array.
+
+
+          <p>Must be a floating point value, such as "<code>1.2</code>".
 <p>This may also be a reference to a resource (in the form
 "<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
 theme attribute (in the form

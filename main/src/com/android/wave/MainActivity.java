@@ -15,12 +15,12 @@ public class MainActivity extends Activity {
 
 		seekBar = (SeekBar) findViewById(R.id.seek_bar);
 		waveView = (WaveView) findViewById(R.id.wave_view);
-
+		seekBar.setMax(100);
 		seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
 			@Override
 			public void onProgressChanged(SeekBar seekBar, int progress,
 					boolean fromUser) {
-				waveView.setProgress(progress);
+				waveView.setProgress(  progress /100f );
 			}
 
 			@Override
